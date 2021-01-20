@@ -12,4 +12,11 @@ movies_df = pd.read_csv("movies.csv")
 print("Num of movies loaded: %s " % (len(movies_df)))
 
 #display loaded data
-print(movies_df)
+movies_df
+
+#combine plot summaries into single column
+movies_df["plot"] = movies_df["wiki_plot"].astype(str) + "\n" \
+    + movies_df["imdb_plot"].astype(str)
+
+#look at new data
+print(movies_df.head())
