@@ -19,3 +19,8 @@ movies_df["plot"] = movies_df["wiki_plot"].astype(str) + "\n" \
 
 #create tfidf matrix with vectorizer function, which also uses tokenize_and_stem
 tfidf_matrix = dm.vectorizer(movies_df)
+
+#create clusters with KMeans function
+movies_df["cluster"] = dm.create_clusters(tfidf_matrix)
+
+print(movies_df["cluster"].value_counts())
