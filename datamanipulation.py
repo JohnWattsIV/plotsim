@@ -4,7 +4,7 @@ import pandas as pd
 import nltk
 import re
 from nltk.stem.snowball import SnowballStemmer
-
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 #function to tokenize and stem text
 def tokenize_and_stem(text):
@@ -21,3 +21,16 @@ def tokenize_and_stem(text):
     stems = [stemmer.stem(t) for t in filtered_tokens]
 
     return stems
+
+#function to create tfidf vectorizer and fit transform
+def vectorizer(text):
+    #create tfidfvectorizer object with stopwords and parameters
+    tfidf_vectorizer = TfidfVectorizer(max_df=0.8, max_features=200000, min_df=0.2, 
+    stop_words='english', use_idf=True, tokenizer=tokenize_and_stem, ngram_range=(1,3))
+    
+    #create vector representation of the plot summaries using fit transform
+    tfidf_matrix = tfidf_vectorizer.fit_transform([x for x in text["plot"]])
+
+    return tfidf_matrix
+
+

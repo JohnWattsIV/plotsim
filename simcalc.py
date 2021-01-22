@@ -17,4 +17,5 @@ print("Num of movies loaded: %s " % (len(movies_df)))
 movies_df["plot"] = movies_df["wiki_plot"].astype(str) + "\n" \
     + movies_df["imdb_plot"].astype(str)
 
-
+#create tfidf matrix with vectorizer function, which also uses tokenize_and_stem
+tfidf_matrix = dm.vectorizer(movies_df)
