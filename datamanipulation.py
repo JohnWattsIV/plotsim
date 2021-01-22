@@ -4,8 +4,9 @@ import pandas as pd
 import nltk
 import re
 from nltk.stem.snowball import SnowballStemmer
-from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 
 #function to tokenize and stem text
 def tokenize_and_stem(text):
@@ -33,7 +34,7 @@ def vectorizer(text):
 
     return tfidf_matrix
 
-# function to create clusters based on similarity
+#function to create clusters based on similarity
 def create_clusters(matrix):
 
     #create KMeans object and set desired number of clusters
@@ -47,4 +48,9 @@ def create_clusters(matrix):
     
     return clusters
     
+#calculate the similarity distance
+def similarity_distance(matrix):
 
+    similarity_dist = 1 - cosine_similarity(matrix)
+
+    return similarity_dist

@@ -23,4 +23,5 @@ tfidf_matrix = dm.vectorizer(movies_df)
 #create clusters with KMeans function
 movies_df["cluster"] = dm.create_clusters(tfidf_matrix)
 
-print(movies_df["cluster"].value_counts())
+#call function to calculate similarity distance
+sim_dist = dm.similarity_distance(tfidf_matrix)
