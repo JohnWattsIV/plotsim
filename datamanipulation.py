@@ -7,6 +7,8 @@ from nltk.stem.snowball import SnowballStemmer
 from sklearn.cluster import KMeans
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import linkage, dendrogram
 
 #function to tokenize and stem text
 def tokenize_and_stem(text):
@@ -54,3 +56,21 @@ def similarity_distance(matrix):
     similarity_dist = 1 - cosine_similarity(matrix)
 
     return similarity_dist
+
+#create a dendrogram of plot similarity
+def create_dendrogram(simdist, moviesdf):
+
+    # Create mergings matrix 
+    merged = linkage(simdist, method='complete')
+
+    # Plot the dendrogram, using title as label column
+    dendrogram_ = dendrogram(merged, labels=[x for x in moviesdf["title"]], leaf_rotation=90, leaf_font_size=16)
+
+    # Adjust the plot
+    fig = plt.gcf()
+    _ = [lbl.set_color('#000000') for lbl in plt.gca().get_xmajorticklabels()]
+    fig.set_size_inches(108,21)
+
+    # Show the plotted dendrogram
+    plt.savefig('dendro.png', format = 'png', bbox_inches = 'tight')
+    plt.show()

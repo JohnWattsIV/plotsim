@@ -25,3 +25,6 @@ movies_df["cluster"] = dm.create_clusters(tfidf_matrix)
 
 #call function to calculate similarity distance
 sim_dist = dm.similarity_distance(tfidf_matrix)
+
+#call function to create dendrogram visualization
+dm.create_dendrogram(sim_dist, movies_df)
