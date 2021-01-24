@@ -74,3 +74,39 @@ def create_dendrogram(simdist, moviesdf):
     # Show the plotted dendrogram
     plt.savefig('dendro.png', format = 'png', bbox_inches = 'tight')
     plt.show()
+
+#function to create CSV files in a format that GEPHI can read
+def gephi_csv(sim_array, movie_frame):
+
+    #create node list csv with id, lavel, node size, cluster
+    node_list = pd.DataFrame(columns = ['id', 'title', 'count', 'modularity'])
+    node_list['id'] = movie_frame['rank']
+    node_list['title'] = movie_frame['title']
+    node_list['count'] = 100/(movie_frame['rank'] + 1)
+    node_list['modularity'] = movie_frame['cluster']
+
+    #send node list to csv
+    node_list.to_csv('nodelist.csv', index = False)
+
+
+    #create edge list csv with source node, target node, weight(10/sim score)
+    edge_list = pd.DataFrame(columns = ['source', 'target', 'weight'])
+    
+    #set index variable
+    i = 0
+
+    #for every source node
+    for index, arr in enumerate(sim_array):
+
+        #for every target node of the source
+        for jndex, value in enumerate(arr):
+
+            #source and target cannot be the same node or an edge already added
+            if index < jndex:
+                #add the edge to the edge list
+                weight = 10 / value
+                edge_list.loc[i] = [index, jndex, weight]
+                i += 1
+
+    #send edge list to csv
+    edge_list.to_csv('edgelist.csv', index = False)                
