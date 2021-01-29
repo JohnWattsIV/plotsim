@@ -37,6 +37,7 @@
  * A Dendrogram can be interpreted by focusing on the height at which two objects are joined. The smaller the height, the more similar the two objects or clusters are 
  to one another. 
  
+ ![dendro](dendro.png)
  
 ## Gephi Weighted Graph
  * We found the dendrogram to be a little tough to interpret, so we imported our data into a visualization program called Gephi and created a weighted graph to better visualize the similarities. 
