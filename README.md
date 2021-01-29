@@ -1,7 +1,6 @@
 # Movie Plot Similarity Visualization
 
-## General Info
-* This project uses natural language processing and clustering to find similarity between the top 100 movies based on their IMDb and Wikipedia plot summaries
+This project uses natural language processing and clustering to find similarity between the top 100 movies based on their IMDb and Wikipedia plot summaries
 
 
 # Data Manipluiation
